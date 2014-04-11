@@ -18,7 +18,7 @@ DbManager = function() {
   };
   
   this.User = mongoose.model('User', {
-    // Facebook ID
+    // Facebook ID or ID from cookie if they didn't login
     fbId : String,
     // the name that we got from the Facebook login
     name : String,
@@ -54,7 +54,7 @@ DbManager.prototype.updateSongList = function(response, userId, newList) {
         return;
       }
       this.callback({
-        "error" : false
+        "error" : false 
       });
     });
   });
