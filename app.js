@@ -1,26 +1,16 @@
+/*
+ * Requires:
+ *   express
+ *   mongoose
+ */
 var express = require('express'),
-  mongoose = require('mongoose'),
-  fs = require('fs'),
-  engines = require('consolidate'),
-  hogan = require('hogan.js'),
-  config = require('./config/config');
+  DbManager = require("./db.js").DbManager;
 
-mongoose.connect(config.db);
-var db = mongoose.connection;
-db.on('error', function () {
-  throw new Error('unable to connect to database at ' + config.db);
-});
 
-var modelsPath = __dirname + '/app/models';
-fs.readdirSync(modelsPath).forEach(function (file) {
-  if (file.indexOf('.js') >= 0) {
-    require(modelsPath + '/' + file);
-  }
-});
+var db = new DbManager(),
+    app = express();
+app.use("/", express.static(__dirname + '/static'));
 
-var app = express();
-app.engine('html', engines.hogan);
-require('./config/express')(app, config);
-require('./config/routes')(app);
 
-app.listen(config.port);
+
+app.listen(8080);
