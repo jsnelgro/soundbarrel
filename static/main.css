@@ -1,0 +1,180 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-image: url("bg-slice.png");
+    background-repeat: repeat-x;
+    background-color: #464471;
+
+}
+
+#bodyContainer {
+    width: 960px;
+    margin: 0 auto;
+}
+
+.header {
+}
+
+#logo {
+    margin-top: 24px;
+    display: inline-block;
+}
+
+#menu {
+    margin-top: 40px;
+    display: inline-block;
+}
+
+.centrepiece {
+    display: inline-block;
+}
+
+#menu {
+    list-style: none;
+    font-family: Helvetica;
+    color: #797979;
+    float: right;
+}
+
+#menu li {
+    margin-right: 15px;
+}
+
+#menu li a {
+    color: #797979;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    color: #555555;
+}
+
+#genreDiv {
+    display: inline-block;
+    width: 240px;
+    height: 34px;
+    margin-left: 60px;
+    overflow: hidden;
+    background: url("down_arrow_select.jpg") no-repeat right #ddd;
+    border: 1px solid #ccc;
+}
+
+#outerButtonDiv {
+    text-align: center;
+    font-family: Helvetica;
+    color: white;
+    font-size: 20px;
+}
+
+a:hover {
+    color: #FFF;
+}
+
+a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+#progressbar {
+    /*height: 80px;*/
+    width: 400px;
+    display: inline-block;
+    margin-right: 100px;
+}
+
+button { /*basic styles*/
+    width: 250px;
+    height: 50px;
+    color: white;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-color: #99CF00;
+    text-align: center;
+    font-size: 30px;
+    line-height: 50px; /*gradient styles*/
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#99CF00), to(#6DB700));
+    background: -moz-linear-gradient(19% 75% 90deg,#6DB700, #99CF00); /*border styles*/
+    border-left: solid 1px #c3f83a;
+    border-top: solid 1px #c3f83a;
+    border-right: solid 1px #82a528;
+    border-bottom: solid 1px #58701b;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-gradient(linear, 0% 0%, 0% 100%, from(#99CF00), to(#6DB700));
+}
+
+button h3 { font-size: 20px; line-height: 35px; font-family: helvetica, sans-serif; }
+
+button p { font-size: 12px; line-height: 4px; font-family: helvetica, sans-serif; }
+button:hover {
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#6DB700), to(#99CF00));
+    background: -moz-linear-gradient(19% 75% 90deg,#99CF00, #6DB700);
+}
+
+#innerBody {
+    margin-top: 50px;
+}
+
+#genreDiv select {
+    background: transparent;
+    width: 240px;
+    padding: 5px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0;
+    color: #555555;
+    height: 34px;
+    -webkit-appearance: none;
+}
+
+#musicPlayers {
+    margin-top: 10px;
+}
+
+.iframeMusic {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.musicPlayer {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 940px;
+    margin: 0 auto;
+    background-color: #ddd;
+    border-radius: 20px;
+    -webkit-box-shadow: 4px 4px 8px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 4px 4px 8px 3px rgba(0,0,0,0.3);
+    box-shadow: 4px 4px 8px 3px rgba(0,0,0,0.3);
+}
+
+#musicPlayer1 {
+     margin-bottom: 30px;
+ }
+
+#musicPlayer2 {
+    margin-bottom: 30px;
+}
+
+#musicPlayer3 {
+    margin-bottom: 30px;
+}
+
+#musicPlayer4 {
+    margin-bottom: 30px;
+}
+
+#musicPlayer5 {
+    margin-bottom: 30px;
+}
+
+#musicPlayerList {
+    list-style: none;
+}
