@@ -51,7 +51,7 @@ log("Server listening on port 8080");
 
 
 // use passport facebook for fb auth? https://github.com/jaredhanson/passport-facebook http://passportjs.org/
-// don't think we need to use passport. We can probably just use the login authentication provided by soundcloud. I posted a link in the readme
+
 
 
 // soundcloud explore api to get initial song list by genre no documented, use below (go to explore page and look at network tab) (can change the limit parameter if want more songs)
