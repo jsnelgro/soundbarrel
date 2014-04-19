@@ -14,4 +14,7 @@ http://connect.soundcloud.com/examples/basic.html
 Soundcloud docs:
 https://developers.soundcloud.com/docs
 
+Soundcloud auth flow:
+http://developers.soundcloud.com/docs/api/sdks#javascript
+
 
