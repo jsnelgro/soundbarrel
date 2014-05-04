@@ -6,7 +6,9 @@
  */
 var express = require('express'),
     http = require('http'),
-    DbManager = require("./db.js").DbManager;
+    DbManager = require("./db.js").DbManager,
+    passport = require('passport'),
+    FacebookStrategy = require('passport-facebook').Strategy;
 
 function log(s) { console.log(s); }
 
@@ -43,15 +45,59 @@ app.get("/fetchGenre", function(req, res) {
 
 // OK NEED TO MAKE REQ.BODY CUZ POST TY BASED NODE
 app.post("/updateGenre", function(req, res) {
-  db.updateGenre(res, "1", req.body.genre, req.body.percent, []);
+  db.updateGenre(res, "1", req.body.genre, req.body.percent, req.body.order);
 });
+
+
+// login stuff
+
+passport.use(new FacebookStrategy({
+    clientID: "230563833809448",
+    clientSecret: "50ac9f9ab651a34ff2f78f0667757232",
+    callbackURL: "http://localhost:8080/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+  	db.getUser(profile.id, function(doc) {
+  		if(doc !== null) {
+  			console.log("soundbarrel info", doc, "facebook id", profile.id);
+  		} else {
+  			db.createNewUserFromID(
+  				{
+  					"userID":profile.id,
+  					"name":profile.displayName,
+  					"emails":profile.emails
+  				}
+  			,function(data){console.log("user added ", data);});
+  		}
+  	});
+  }
+));
+
+app.get("/login", function(req, res) {
+	res.sendfile( __dirname + '/static/login.html');
+});
+// Redirect the user to Facebook for authentication.  When complete,
+// Facebook will redirect the user back to the application at
+//     /auth/facebook/callback
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// Facebook will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+app.get('/auth/facebook/callback', 
+	passport.authenticate('facebook', 
+		{ 
+			successRedirect: '/',
+			failureRedirect: '/login' 
+		}
+	)
+);
+
+
 
 app.listen(8080);
 log("Server listening on port 8080");
-
-
-// use passport facebook for fb auth? https://github.com/jaredhanson/passport-facebook http://passportjs.org/
-
 
 
 // soundcloud explore api to get initial song list by genre no documented, use below (go to explore page and look at network tab) (can change the limit parameter if want more songs)

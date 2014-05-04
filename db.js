@@ -11,7 +11,7 @@ function log(msg) {
 var songCount = 30;
 
 DbManager = function() {
-  mongoose.connect('mongodb://localhost/soundbarrel');
+  mongoose.connect('mongodb://znado:zztop@oceanic.mongohq.com:10064/johnnyDB');
   mongoose.connection.on('error', function () {
     throw new Error('unable to connect to database at mongodb://localhost/soundbarrel');
   });
@@ -28,7 +28,9 @@ DbManager = function() {
       // the values are the percent complete in sorting the songs
       percentagesComplete : mongoose.Schema.Types.Mixed,
       // an object where the keys are the genres and each value is
-      // an ordered array of the player object ids
+      // an array of objects where the key is the player object id
+      // from the mongodb database and the value is the relative change
+      // from the orderings (the sum of the +/-1,2s)
       orders : mongoose.Schema.Types.Mixed,
       // an object whose keys are genres and whose values are
       // objects where the keys are the serialized mongo ids
@@ -60,7 +62,7 @@ DbManager = function() {
           });
           return;
         }
-        callback();
+        callback(doc);
       });
     }
 
@@ -113,10 +115,11 @@ DbManager = function() {
         doc.players[genre] = playersObject;
         doc.orders[genre] = playerOrder;
         doc.percentagesComplete[genre] = 0;
-        self.saveUser(doc, function() {});
-        response.json({
-          "players" : genrePlayers,
-          "percent" : 0
+        self.saveUser(doc, function(savedDoc) {
+          response.json({
+            "userData" : savedDoc,
+            "percent" : 0
+          });
         });
       });
     }
@@ -144,24 +147,38 @@ DbManager = function() {
 DbManager.prototype.updateGenre = function(response, userId, genre, percent, newList) {
   var self = this;
   this.getUser(userId, function(doc) {
+  log(newList);
     doc.orders[genre] = newList;
     doc.percentagesComplete[genre] = percent;
-    self.saveUser(doc, function() {
-      /*response.json({
-        "error" : false 
-      });*/
-      // DO NOT DO THIS IN PRODUCTION ONLY FOR DEMO
-      log(genre);
-      self.startGenre(response, doc, genre);
+    log("DOC:");
+    log(JSON.stringify(doc));
+    self.saveUser(doc, function(savedDoc) {
+      //self.startGenre(response, doc, genre);
     });
   });
 }
 
 DbManager.prototype.createNewUser = function(response, userId, username) {
-  this.saveUser(new this.User(userId, username, {}, {}, {}), function() {
+  this.saveUser(new this.User({
+    "userId" : userId, 
+    "name" : username, 
+    "percentagesComplete" : {}, 
+    "orders" : {}, 
+    "players" : {}
+  }), function() {
     response.json({
       "error" : false 
     });
+  });
+}
+
+DbManager.prototype.createNewUserFromID = function(userData, callback) {
+  userData.percentagesComplete = {};
+  userData.orders = {};
+  userData.players = {};
+  console.log("user data: ", userData);
+  this.saveUser(new this.User(userData), function(userData){
+    callback(userData);
   });
 }
 
@@ -178,7 +195,7 @@ DbManager.prototype.fetchGenre = function(response, userId, genre) {
         orderedPlayers.push(players[order[i]]);
       }
       res.json({
-        "players" : orderedPlayes,
+        "userData" : orderedPlayes,
         "percent" : doc.percentagesComplete[genre]
       });
       return;
