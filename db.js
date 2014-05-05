@@ -73,7 +73,7 @@ DbManager = function() {
       var getOptions = {
         host: 'api-v2.soundcloud.com',
         port: '443',
-        path: '/explore/' + genre + "?limit=" + songCount + "&offset=0",
+        path: '/explore/' + genre + "?limit=" + 15 + "&offset=0",
         method: 'GET',
       };
       self.makeExternalHttpReq(true, {}, getOptions, function(soundcloudRes) {
@@ -83,7 +83,7 @@ DbManager = function() {
             log(genreTracks.length);
         var randomIndexes = [];
         while(randomIndexes.length < 3) {
-          var ran = Math.ceil(Math.random()*(songCount - 1))
+          var ran = Math.ceil(Math.random()*(15 - 1));
           var found = false;
           for(var i=0; i<randomIndexes.length; i++) {
             if(randomIndexes[i] == ran) {
@@ -140,7 +140,26 @@ DbManager = function() {
       req.end();
     }
   });
+  
+  self.done = function(response, genre) {
+    var getOptions = {
+      host: 'api-v2.soundcloud.com',
+      port: '443',
+      path: '/explore/' + genre + "?limit=" + 10 + "&offset=18",
+      method: 'GET',
+    };
+    self.makeExternalHttpReq(true, {}, getOptions, function(soundcloudRes) {
+      // an array of objects from which we can get the players
+      var genreTracks = JSON.parse(soundcloudRes).tracks,
+          numberTracksDone = 0;
+      var genrePlayers = genreTracks.map(function(track) {
+        return track.uri;
+      });
+      response.json(genrePlayers);
+    });
+  }
 }
+
 
 // newList is a list of object ids that are in the order of the
 // new list
@@ -153,7 +172,7 @@ DbManager.prototype.updateGenre = function(response, userId, genre, percent, new
     log("DOC:");
     log(JSON.stringify(doc));
     self.saveUser(doc, function(savedDoc) {
-      //self.startGenre(response, doc, genre);
+      self.startGenre(response, doc, genre);
     });
   });
 }

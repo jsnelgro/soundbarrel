@@ -6,17 +6,25 @@
  */
 var express = require('express'),
     http = require('http'),
-    DbManager = require("./db.js").DbManager,
-    passport = require('passport'),
-    FacebookStrategy = require('passport-facebook').Strategy;
+    DbManager = require("./db.js").DbManager;
+    //passport = require('passport'),
+    //FacebookStrategy = require('passport-facebook').Strategy;
 
 function log(s) { console.log(s); }
 
 var db = new DbManager(),
     app = express();
 
-app.use(express.static(__dirname + '/static'));
+// needed for request data parsing
 app.use(express.bodyParser());
+
+// this has to come before the static content serving line
+app.get("/", function(req, res) {
+  res.redirect("/electronic");
+});
+
+app.use(express.static(__dirname + '/static'));
+
 
 
 app.post("/createUser", function(req, res) {
@@ -28,7 +36,6 @@ var servePlay = function(req, res) {
   res.sendfile(__dirname + '/static/index.html');
 }
 
-app.get("/alternative", servePlay);
 app.get("/ambient", servePlay);
 app.get("/classical", servePlay);
 app.get("/country", servePlay);
@@ -50,7 +57,7 @@ app.post("/updateGenre", function(req, res) {
 
 
 // login stuff
-
+/*
 passport.use(new FacebookStrategy({
     clientID: "230563833809448",
     clientSecret: "50ac9f9ab651a34ff2f78f0667757232",
@@ -71,29 +78,33 @@ passport.use(new FacebookStrategy({
   		}
   	});
   }
-));
+));*/
 
 app.get("/login", function(req, res) {
 	res.sendfile( __dirname + '/static/login.html');
 });
+
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
-app.get('/auth/facebook', passport.authenticate('facebook'));
+//app.get('/auth/facebook', passport.authenticate('facebook'));
 
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
-app.get('/auth/facebook/callback', 
+/*app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', 
 		{ 
-			successRedirect: '/',
+			successRedirect: '/electronic',
 			failureRedirect: '/login' 
 		}
 	)
-);
+);*/
 
+app.get("/done", function(req, res) {
+	db.done(res, req.query.genre);
+});
 
 
 app.listen(8080);

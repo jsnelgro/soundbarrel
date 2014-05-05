@@ -6,6 +6,18 @@ if(/^[a-x]+$/.exec(path) == null) {
 genre = path.substring(1);
 
 $(document).ready(function() {
+$.ajax({
+    "url" : "/done",
+    "type" : "GET",
+    "data" : {
+      "genre" : genre,
+    },
+"success" : function(data) {
+log(data);
+}});
+  if(genre == "") {
+    return;
+  }
   $.ajax({
     "url" : "/fetchGenre",
     "type" : "GET",
@@ -48,11 +60,16 @@ $(document).ready(function() {
         "percent" : newPercent
       },
       "success" : function(data) {
+      log(data);
         // do something with the loaded content
-        var songs = data.players;//JSON.parse(request.responseText);
+        var songs = data.userData.players[genre];//JSON.parse(request.responseText);
         var containers = $(".iframeMusic");
-        for(i=0; i<containers.length; i++) {
-          containers[i].innerHTML = "<iframe width='920' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=" + songs[i] + "&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true'></iframe>";
+        log(containers);
+        log(containers[0]);
+        var i=0;
+        for(id in songs) {
+          containers[i].innerHTML = "<iframe id='" + id + "' width='920' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=" + songs[id] + "&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true'></iframe>";
+          i++;
         }
         progress.progressbar({value: newPercent});
         progressBarText.text(newPercent + "%");
