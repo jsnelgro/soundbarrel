@@ -178,3 +178,17 @@ button:hover {
 #musicPlayerList {
     list-style: none;
 }
+
+
+/***************************** Login styling ***********************************/
+
+#login_h1 {
+    text-align: center;
+}
+
+#fb_login_btn {
+    
+}
+
+
+
