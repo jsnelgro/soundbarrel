@@ -8,6 +8,8 @@
   "dependencies": {
     "express": "~3.3.4",
     "mongoose": "~3.6.14",
+    "passport": "*",
+    "passport-facebook": "*",
     "mongodb": "~1.4.3"
   }
 }
