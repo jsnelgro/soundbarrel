@@ -145,7 +145,7 @@ DbManager = function() {
     var getOptions = {
       host: 'api-v2.soundcloud.com',
       port: '443',
-      path: '/explore/' + genre + "?limit=" + 10 + "&offset=18",
+      path: '/explore/' + genre + "?limit=" + 10 + "&offset=28",
       method: 'GET',
     };
     self.makeExternalHttpReq(true, {}, getOptions, function(soundcloudRes) {

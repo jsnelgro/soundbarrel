@@ -6,18 +6,11 @@ if(/^[a-x]+$/.exec(path) == null) {
 genre = path.substring(1);
 
 $(document).ready(function() {
-$.ajax({
-    "url" : "/done",
-    "type" : "GET",
-    "data" : {
-      "genre" : genre,
-    },
-"success" : function(data) {
-log(data);
-}});
-  if(genre == "") {
-    return;
-  }
+
+  // set dropdown
+  log(genre.capitalize());
+  $("#genreselect").val(genre.capitalize());
+
   $.ajax({
     "url" : "/fetchGenre",
     "type" : "GET",
@@ -47,6 +40,9 @@ log(data);
   $("#doneSorting").click(function() {
     
     var newPercent = parseInt(progress.attr("aria-valuenow")) + 10;
+    if(newPercent >= 100) {
+        window.location = "/complete?genre="+genre;
+    }
     var newOrder = getOrder();
     log("ord");
     log(newOrder);
@@ -60,13 +56,9 @@ log(data);
         "percent" : newPercent
       },
       "success" : function(data) {
-      log(data);
         // do something with the loaded content
-        var songs = data.userData.players[genre];//JSON.parse(request.responseText);
-        var containers = $(".iframeMusic");
-        log(containers);
-        log(containers[0]);
-        var i=0;
+        var songs = data.userData.players[genre];
+        var containers = $(".iframeMusic"), i=0;
         for(id in songs) {
           containers[i].innerHTML = "<iframe id='" + id + "' width='920' height='166' scrolling='no' frameborder='no' src='https://w.soundcloud.com/player/?url=" + songs[id] + "&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true'></iframe>";
           i++;
@@ -95,6 +87,10 @@ function storeGenre(selection) {
   //var store = {"id":createID(), "genre":selection, "percentage":33.3};
   //$.cookie('soundbarrelUserSession', JSON.stringify(store), {expires:3, path:'/'});
   window.location= "/" + selection.toLowerCase();
+}
+
+String.prototype.capitalize = function() {
+    return this.substr(0, 1).toUpperCase() + this.substr(1);
 }
 
 function log(s) { console.log(s); }

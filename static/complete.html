@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <title>SoundBarrel</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="http://taitems.github.io/Aristo-jQuery-UI-Theme/css/Aristo/Aristo.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="./jquery.cookie.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="complete.js"></script>
+</head>
+<body style="margin:0px; padding:0px;">
+<div id="bodyContainer">
+    <div class="header">
+        <div id="logo">
+            <img src="soundbarrel.png" id="logoImg">
+        </div>
+
+        <div id="genreDiv">
+            <select id="genreselect" onchange="storeGenre($('#genreselect').val())">
+                <option value="Alternative">Alternative</option>
+                <option value="Ambient">Ambient</option>
+                <option value="Classical">Classical</option>
+                <option value="Country">Country</option>
+                <option value="Electronic">Electronic</option>
+                <option value="Folk">Folk</option>
+                <option value="Jazz">Jazz</option>
+                <option value="Metal">Metal</option>
+                <option value="Pop">Pop</option>
+                <option value="Rock">Rock</option>
+            </select>
+        </div>
+
+        <ul id="menu">
+            <li class="centrepiece menuItem">
+                <!--<h2><a href="#">SIGNUP</a></h2>-->
+            </li>
+            <li class="centrepiece menuItem">
+               <!--<h2><a href="#">LOG IN</a></h2>-->
+            </li>
+        </ul>
+
+    </div>
+    <div id="innerBody">
+        <div id="outerButtonDiv">
+            You've finished sorting! Here are a list of songs that we think you'd like!
+        </div>
+    </div>
+    <div id="musicPlayers"> <ul id="musicPlayerList">
+        <li><div class="musicPlayer" id="musicPlayer1">
+            <div id="iframeDivFixer1"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/86256527&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer2">
+            <div id="iframeDivFixer2"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/111779418&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer4">
+            <div id="iframeDivFixer4"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140779152&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer5">
+            <div id="iframeDivFixer5"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140779152&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer6">
+            <div id="iframeDivFixer6"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140779152&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer7">
+            <div id="iframeDivFixer7"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140779152&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer8">
+            <div id="iframeDivFixer8"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140779152&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer9">
+            <div id="iframeDivFixer9"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140779152&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+        <li><div class="musicPlayer" id="musicPlayer10">
+            <div id="iframeDivFixer10"></div>
+            <div class="iframeMusic">
+                <!--<iframe width="920" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/140779152&amp;color=666699&amp;auto_play=false&amp;hide_related=true&amp;show_artwork=true"></iframe>-->
+            </div>
+        </div></li>
+    </ul> </div>
+</div>
+</body>
+</html>

@@ -102,6 +102,14 @@ app.get("/login", function(req, res) {
 	)
 );*/
 
+app.get("/:genre/done", function(req, res) {
+	db.done(res, req.param("genre"));
+});
+
+app.get("/complete", function(req, res) {
+	res.sendfile( __dirname + '/static/complete.html');
+});
+
 app.get("/done", function(req, res) {
 	db.done(res, req.query.genre);
 });
