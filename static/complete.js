@@ -1,8 +1,9 @@
-var path = window.location.search, genre, userid = "1";
+var path = window.location.search, genre;
 genre = path.split("?genre=")[1];
 
 $(document).ready(function() {
   if(genre == "") {
+    window.location = "/login";
     return;
   }
   
@@ -16,6 +17,10 @@ $(document).ready(function() {
       "genre" : genre,
     },
     "success" : function(data) {
+      if(data.error) {
+        window.location = "/" + genre;
+        return;
+      }
       console.log(data);
       var songs = data;
       var containers = $(".iframeMusic"), i=0;

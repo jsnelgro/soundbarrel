@@ -200,3 +200,39 @@ button:hover {
 #musicPlayerList {
     list-style: none;
 }
+
+
+/***************************** Login styling ***********************************/
+
+#login_h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+#fb_login_btn {
+}
+
+
+
+
+#login_btns {
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 10%;
+}
+
+.centered-txt {
+    text-align: center;
+}
+
+#home_btn {
+    display: inline-block;
+    color:black;
+    width: 50px;
+    height: 20px;
+}
+
+a.button {
+  display: block;
+  width: 220px;
+}

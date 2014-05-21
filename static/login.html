@@ -3,10 +3,16 @@
 	<head>
 		<meta charset="utf8">
 		<title>SoundBarrel</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body>
-		<h1>Log da fuk in</h1>
-		<a href="/auth/facebook">Login with Facebook</a>
+        <a id="home_btn" href="/">Home</a>
+		<h1 id="login_h1" class="centered-txt">Login
+        <p class="centered-txt small">Use your favorite social platforms to access SoundBarrel</p>
+            </h1>
+        <div id="login_btns">
+		  <a href="/auth/facebook" id="fb_login_btn"><img src="facebook-login-btn.png" alt="login with facebook"></a>
+        </div>
 	</body>
 </html>
